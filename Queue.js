@@ -76,3 +76,62 @@ function main() {
 }
 
 main();
+
+class SquareDancing {
+  constructor() {
+    // Male Queue
+    this.maleQueue = new Queue;
+    // Female Queue
+    this.femaleQueue = new Queue;
+  }
+  
+  addToQueue(gender, name) {
+    if (gender === 'F') {
+      this.femaleQueue.enqueue(name);
+    } else {
+      this.maleQueue.enqueue(name);
+    }
+  }
+
+  matchPartners() {
+    while (this.maleQueue.first && this.femaleQueue.first) {
+      console.log(`Female dancer is ${this.femaleQueue.dequeue()}, and the male dancer is ${this.maleQueue.dequeue()}`);
+    }
+    if (this.maleQueue.first) {
+      let i = 0;
+      let currNode = this.maleQueue.first;
+
+      while (currNode) {
+        i++;
+        currNode = currNode.next;
+      }
+      console.log(`There are ${i} male dancers waiting to dance`);
+    }
+    if (this.femaleQueue.first) {
+      let i = 0;
+      let currNode = this.femaleQueue.first;
+
+      while (currNode) {
+        i++;
+        currNode = currNode.next;
+      }
+      console.log(`There are ${i} female dancers waiting to dance`);
+    }
+  }
+}
+
+let squareDancers = new SquareDancing;
+
+function main2() {
+  squareDancers.addToQueue('F', 'Jane');
+  squareDancers.addToQueue('M', 'Frank');
+  squareDancers.addToQueue('M', 'John');
+  squareDancers.addToQueue('M', 'Sherlock');
+  squareDancers.addToQueue('F', 'Madonna');
+  squareDancers.addToQueue('M', 'David');
+  squareDancers.addToQueue('M', 'Christopher');
+  squareDancers.addToQueue('F', 'Beyonce');
+  squareDancers.matchPartners();
+}
+
+main2();

@@ -62,6 +62,62 @@ class StackQueue {
 
   }
 }
+
+class stackQueue2 {
+  constructor() {
+    this.top = null;
+    this.stack1 = new Stack;
+    this.stack2 = new Stack;
+  }
+
+  push(data) {
+    if (this.stack1.top === null) {
+      this.stack1.top = new _Node(data, null);
+      console.log(this.stack1);
+      return this.stack1.top;
+    }
+    
+    const node = new _Node(data, null);
+    this.stack1.top.next = node;
+    this.stack1.top = node;
+    console.log(this.stack1);
+  }
+
+  convertToQueue() {
+    // loop through and put on stack 2
+    let currNode = this.stack1.top;
+    while (currNode) {
+      this.stack2.push(currNode);
+      currNode = currNode.next;
+    }
+    return this.stack2;
+  }
+
+  pop() {
+    this.convertToQueue(this.stack1, this.stack2);
+    const node = this.stack2.top;
+    this.stack2.top = node.next;
+    return node.data;
+  }
+
+  display() {
+    if (!this.stack2.top){
+      return [];
+    }
+    let myArr = [];
+    let currNode = this.stack2.top;
+    while(currNode !== null){
+      myArr = [currNode.data, ...myArr]; //--> Use for printing list in correct order
+      currNode = currNode.next;
+    }
+    return myArr;
+  }
+}
+
+let stackQueue = new stackQueue2;
+
+
+
 // ===== 2. Useful methods for a stack =====
 function stackPeek(stack){
   return stack.top;
@@ -144,21 +200,21 @@ function stackMatchingParentheses(data){
 }
 
 // ===== 5. Sort stack =====   --> come back if we have time
-function sortStack(stack){
+// function sortStack(stack){
 
-  let tempStack = new Stack;
-  let stackPeek = stackPeek(tempStack);
+//   let tempStack = new Stack;
+//   let stackPeek = stackPeek(tempStack);
 
-  while () {
-    let tempVar = stack.pop();
-  //peek at top of tempStack
-  if (tempStack.top && stackPeek > tempVar) {
-    stack.push(tempStack.pop());
-    tempStack.push(tempVar);
-  } else {
-    tempStack.push(tempVar);
-  }
-  }
+//   while () {
+//     let tempVar = stack.pop();
+//   //peek at top of tempStack
+//   if (tempStack.top && stackPeek > tempVar) {
+//     stack.push(tempStack.pop());
+//     tempStack.push(tempVar);
+//   } else {
+//     tempStack.push(tempVar);
+//   }
+//   }
   
 
 
@@ -174,7 +230,7 @@ function sortStack(stack){
   //     currNode = nextNode;
   //   }
   // }
-}
+//}
 
 // ===== 6. Create a queue using Singly linked list =====
 
@@ -194,14 +250,17 @@ function main(){
   // console.log(stackPeek(starTrek));
   // console.log(stackMatchingParentheses('(thi{si[sf}u]n)and(thisiscool)')); //true
   // console.log(stackMatchingParentheses('(thisisfun)and(thisiscool')); //false
-  let nums = new Stack;
-  nums.push(2);
-  nums.push(3);
-  nums.push(11);
-  nums.push(6);
-  console.log(stackDisplay(nums));
-  sortStack(nums);
-  console.log(stackDisplay(nums));
+  // let nums = new Stack;
+  // nums.push(2);
+  // nums.push(3);
+  // nums.push(11);
+  // nums.push(6);
+  // console.log(stackDisplay(nums));
+  // sortStack(nums);
+  // console.log(stackDisplay(nums));
+  stackQueue.push('First');
+  stackQueue.push('Second');
+  stackQueue.display();
 }
 
 main();

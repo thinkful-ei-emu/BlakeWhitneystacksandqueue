@@ -112,20 +112,41 @@ function stackMatchingParentheses(data){
   
 }
 
+// ===== 5. Sort stack =====   --> come back if we have time
 function sortStack(stack){
-  let currNode = stack.top;
-  let nextNode = stack.top;
-  while(nextNode){
-    nextNode = currNode.next;
-    if (nextNode && currNode.data > nextNode.data ){
-      currNode.next = nextNode.next;
-      nextNode.next = currNode;
-    }
-    else{
-      currNode = nextNode;
-    }
+
+  let tempStack = new Stack;
+  let stackPeek = stackPeek(tempStack);
+
+  while () {
+    let tempVar = stack.pop();
+  //peek at top of tempStack
+  if (tempStack.top && stackPeek > tempVar) {
+    stack.push(tempStack.pop());
+    tempStack.push(tempVar);
+  } else {
+    tempStack.push(tempVar);
   }
+  }
+  
+
+
+  // let currNode = stack.top;
+  // let nextNode = stack.top;
+  // while(nextNode){
+  //   nextNode = currNode.next;
+  //   if (nextNode && currNode.data > nextNode.data ){
+  //     currNode.next = nextNode.next;
+  //     nextNode.next = currNode;
+  //   }
+  //   else{
+  //     currNode = nextNode;
+  //   }
+  // }
 }
+
+// ===== 6. Create a queue using Singly linked list =====
+
 
 // ===== Stack calls =====
 function main(){

@@ -122,16 +122,51 @@ class SquareDancing {
 
 let squareDancers = new SquareDancing;
 
+
+class BankQueue{
+  constructor(){
+    this.line = new Queue;
+  }
+  getInLine(){
+    let paperWork = (Math.random() >= .25);
+    this.line.enqueue(paperWork);
+  }
+  goThroughDay(){
+    while (this.line.first){
+      const myItem = this.line.dequeue();
+      if (myItem){
+        console.log('succesful transaction');
+      }
+      else{
+        console.log('back of the line , loser');
+        this.getInLine();
+      }
+    }
+  }
+}
+let myBank = new BankQueue;
+
 function main2() {
-  squareDancers.addToQueue('F', 'Jane');
-  squareDancers.addToQueue('M', 'Frank');
-  squareDancers.addToQueue('M', 'John');
-  squareDancers.addToQueue('M', 'Sherlock');
-  squareDancers.addToQueue('F', 'Madonna');
-  squareDancers.addToQueue('M', 'David');
-  squareDancers.addToQueue('M', 'Christopher');
-  squareDancers.addToQueue('F', 'Beyonce');
-  squareDancers.matchPartners();
+  // squareDancers.addToQueue('F', 'Jane');
+  // squareDancers.addToQueue('M', 'Frank');
+  // squareDancers.addToQueue('M', 'John');
+  // squareDancers.addToQueue('M', 'Sherlock');
+  // squareDancers.addToQueue('F', 'Madonna');
+  // squareDancers.addToQueue('M', 'David');
+  // squareDancers.addToQueue('M', 'Christopher');
+  // squareDancers.addToQueue('F', 'Beyonce');
+  // squareDancers.matchPartners();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.getInLine();
+  myBank.goThroughDay();
 }
 
 main2();

@@ -31,6 +31,37 @@ class Stack {
 
 let starTrek = new Stack;
 
+
+class StackQueue {
+  constructor(){
+    this.first = null;
+    this.last = null;
+    this.stack1 = new Stack;
+    this.stack2 = new Stack;
+  }
+  enqueue(data){
+    const node = new _Node(data, null);
+    if (this.first === null){
+      this.first = node;
+      this.last = node;
+      this.stack1.push(node);
+      return ;
+    }
+    else{
+      this.last.next = node
+      this.last = node
+      this.stack2.push(this.stack1.pop());
+      this.stack1.push(node);
+      this.stack1.push(this.stack2.pop());
+    }
+
+
+    
+  }
+  dequeue(data){
+
+  }
+}
 // ===== 2. Useful methods for a stack =====
 function stackPeek(stack){
   return stack.top;

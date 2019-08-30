@@ -76,6 +76,8 @@ function is_palindrome(s) {
 function stackMatchingParentheses(data){
   // Create an empty stack
   let parenthesesComparison = new Stack;
+  let bracketsComparison = new Stack;
+  let bracesComparison = new Stack;
   // Move through the data given
   for (let i = 0; i < data.length; i++) {
     // If char = "(", push to stack
@@ -86,20 +88,51 @@ function stackMatchingParentheses(data){
     if (data.charAt(i) === ')') {
       parenthesesComparison.pop();
     }
+
+    if (data.charAt(i) === '{') {
+      bracesComparison.push(data.charAt(i));
+    } else
+    // if char = "}", pop from stack
+    if (data.charAt(i) === '}') {
+      bracesComparison.pop();
+    }
+    if (data.charAt(i) === '[') {
+      bracketsComparison.push(data.charAt(i));
+    } else
+    // if char = "]", pop from stack
+    if (data.charAt(i) === ']') {
+      bracketsComparison.pop();
+    }
   }
-  if (!parenthesesComparison.top) {
+  
+  if (!(parenthesesComparison.top || bracesComparison.top || bracketsComparison.top)) {
     return true;
   } else
     return false;
   
 }
 
+function sortStack(stack){
+  let currNode = stack.top;
+  let nextNode = stack.top;
+  while(nextNode){
+    nextNode = currNode.next;
+    if (nextNode && currNode.data > nextNode.data ){
+      currNode.next = nextNode.next;
+      nextNode.next = currNode;
+    }
+    else{
+      currNode = nextNode;
+    }
+  }
+}
+
 // ===== Stack calls =====
 function main(){
-  starTrek.push('Kirk');
-  starTrek.push('Spock');
-  starTrek.push('McCoy');
-  starTrek.push('Scotty');
+  // starTrek.push('Kirk');
+  // starTrek.push('Spock');
+  // starTrek.push('McCoy');
+  // starTrek.push('Scotty');
   // starTrek.pop();
   // starTrek.pop();
   // console.log(is_palindrome('dad'));
@@ -107,10 +140,16 @@ function main(){
   // console.log(is_palindrome('1001'));
   // console.log(is_palindrome('Tauhida'));
   // console.log(stackPeek(starTrek));
-  console.log(stackMatchingParentheses('(thisisfun)and(thisiscool)')); //true
-  console.log(stackMatchingParentheses('(thisisfun)and(thisiscool')); //false
-
-  console.log(stackDisplay(starTrek));
+  // console.log(stackMatchingParentheses('(thi{si[sf}u]n)and(thisiscool)')); //true
+  // console.log(stackMatchingParentheses('(thisisfun)and(thisiscool')); //false
+  let nums = new Stack;
+  nums.push(2);
+  nums.push(3);
+  nums.push(11);
+  nums.push(6);
+  console.log(stackDisplay(nums));
+  sortStack(nums);
+  console.log(stackDisplay(nums));
 }
 
 main();
